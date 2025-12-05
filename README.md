@@ -2,7 +2,7 @@
 
 Meine Lösungen für [Advent of Code](https://adventofcode.com/) in Rust.
 
-[![Rust Tests](https://github.com/felix_rieg/AoC/workflows/Rust%20Tests/badge.svg)](https://github.com/felix_rieg/AoC/actions)
+[![Rust Tests](https://github.com/felixrieg/AoC2025/workflows/Rust%20Tests/badge.svg)](https://github.com/felixrieg/AoC2025/actions)
 
 ## Verwendung
 
@@ -54,13 +54,13 @@ cargo test -- --nocapture  # Mit Output
 
 ## Utils Module
 
-| Funktion | Beschreibung |
-|----------|-------------|
-| `read_input(day)` | Liest komplette Input-Datei |
-| `read_lines(day)` | Liest Input zeilenweise |
-| `read_numbers(day)` | Parst alle Zahlen aus Input |
-| `read_input_and_split(day, sep)` | Splittet nach Separator |
-| `split_on_empty_lines(input)` | Gruppiert nach leeren Zeilen |
+| Funktion                         | Beschreibung                 |
+| -------------------------------- | ---------------------------- |
+| `read_input(day)`                | Liest komplette Input-Datei  |
+| `read_lines(day)`                | Liest Input zeilenweise      |
+| `read_numbers(day)`              | Parst alle Zahlen aus Input  |
+| `read_input_and_split(day, sep)` | Splittet nach Separator      |
+| `split_on_empty_lines(input)`    | Gruppiert nach leeren Zeilen |
 
 ## Range Struct
 
@@ -72,4 +72,3 @@ for i in r {
     println!("{}", i);  // 1, 2, 3, 4, 5
 }
 ```
-
