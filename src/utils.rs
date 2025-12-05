@@ -7,10 +7,7 @@ pub fn read_input(day: u8) -> String {
 }
 
 pub fn read_lines(day: u8) -> Vec<String> {
-    read_input(day)
-        .lines()
-        .map(|s| s.to_string())
-        .collect()
+    read_input(day).lines().map(|s| s.to_string()).collect()
 }
 
 #[allow(dead_code)]
@@ -60,9 +57,9 @@ mod tests {
         let day = 99;
         let content = "Hello\nWorld";
         create_test_input_file(day, content);
-        
+
         let result = read_input(day);
-        
+
         assert_eq!(result, "Hello\nWorld");
         cleanup_test_file(day);
     }
@@ -80,9 +77,9 @@ mod tests {
         let day = 97;
         let content = "line1\nline2\nline3";
         create_test_input_file(day, content);
-        
+
         let lines = read_lines(day);
-        
+
         assert_eq!(lines.len(), 3);
         assert_eq!(lines[0], "line1");
         assert_eq!(lines[1], "line2");
@@ -95,9 +92,9 @@ mod tests {
         let day = 96;
         let content = "";
         create_test_input_file(day, content);
-        
+
         let lines = read_lines(day);
-        
+
         assert_eq!(lines.len(), 0);
         cleanup_test_file(day);
     }
@@ -107,9 +104,9 @@ mod tests {
         let day = 95;
         let content = "only one line";
         create_test_input_file(day, content);
-        
+
         let lines = read_lines(day);
-        
+
         assert_eq!(lines.len(), 1);
         assert_eq!(lines[0], "only one line");
         cleanup_test_file(day);
@@ -120,9 +117,9 @@ mod tests {
         let day = 94;
         let content = "apple,banana,cherry";
         create_test_input_file(day, content);
-        
+
         let parts = read_input_and_split(day, ",");
-        
+
         assert_eq!(parts.len(), 3);
         assert_eq!(parts[0], "apple");
         assert_eq!(parts[1], "banana");
@@ -135,9 +132,9 @@ mod tests {
         let day = 93;
         let content = "  apple , banana , cherry  ";
         create_test_input_file(day, content);
-        
+
         let parts = read_input_and_split(day, ",");
-        
+
         assert_eq!(parts.len(), 3);
         assert_eq!(parts[0], "apple");
         assert_eq!(parts[1], "banana");
@@ -150,9 +147,9 @@ mod tests {
         let day = 92;
         let content = "one;two;three";
         create_test_input_file(day, content);
-        
+
         let parts = read_input_and_split(day, ";");
-        
+
         assert_eq!(parts.len(), 3);
         assert_eq!(parts[0], "one");
         assert_eq!(parts[1], "two");
@@ -165,9 +162,9 @@ mod tests {
         let day = 91;
         let content = "123\n456\nnot a number\n789";
         create_test_input_file(day, content);
-        
+
         let numbers = read_numbers(day);
-        
+
         assert_eq!(numbers.len(), 3);
         assert_eq!(numbers[0], 123);
         assert_eq!(numbers[1], 456);
@@ -180,9 +177,9 @@ mod tests {
         let day = 90;
         let content = "-123\n456\n-789";
         create_test_input_file(day, content);
-        
+
         let numbers = read_numbers(day);
-        
+
         assert_eq!(numbers.len(), 3);
         assert_eq!(numbers[0], -123);
         assert_eq!(numbers[1], 456);
@@ -195,9 +192,9 @@ mod tests {
         let day = 89;
         let content = "not numbers\nat all";
         create_test_input_file(day, content);
-        
+
         let numbers = read_numbers(day);
-        
+
         assert_eq!(numbers.len(), 0);
         cleanup_test_file(day);
     }
@@ -211,9 +208,9 @@ mod tests {
             "line3".to_string(),
             "line4".to_string(),
         ];
-        
+
         let groups = split_on_empty_lines(&input);
-        
+
         assert_eq!(groups.len(), 2);
         assert_eq!(groups[0].len(), 2);
         assert_eq!(groups[1].len(), 2);
@@ -232,9 +229,9 @@ mod tests {
             "d".to_string(),
             "e".to_string(),
         ];
-        
+
         let groups = split_on_empty_lines(&input);
-        
+
         assert_eq!(groups.len(), 3);
         assert_eq!(groups[0].len(), 2);
         assert_eq!(groups[1].len(), 1);
@@ -243,14 +240,10 @@ mod tests {
 
     #[test]
     fn test_split_on_empty_lines_whitespace() {
-        let input = vec![
-            "line1".to_string(),
-            "   ".to_string(),
-            "line2".to_string(),
-        ];
-        
+        let input = vec!["line1".to_string(), "   ".to_string(), "line2".to_string()];
+
         let groups = split_on_empty_lines(&input);
-        
+
         assert_eq!(groups.len(), 2);
         assert_eq!(groups[0], vec!["line1".to_string()]);
         assert_eq!(groups[1], vec!["line2".to_string()]);
@@ -260,7 +253,7 @@ mod tests {
     fn test_split_on_empty_lines_no_groups() {
         let input = vec!["line1".to_string(), "line2".to_string()];
         let groups = split_on_empty_lines(&input);
-        
+
         assert_eq!(groups.len(), 1);
         assert_eq!(groups[0].len(), 2);
     }
@@ -269,7 +262,7 @@ mod tests {
     fn test_split_on_empty_lines_empty_input() {
         let input: Vec<String> = vec![];
         let groups = split_on_empty_lines(&input);
-        
+
         assert_eq!(groups.len(), 0);
     }
 
@@ -277,9 +270,7 @@ mod tests {
     fn test_split_on_empty_lines_only_empty() {
         let input = vec!["".to_string(), "".to_string()];
         let groups = split_on_empty_lines(&input);
-        
+
         assert_eq!(groups.len(), 0);
     }
 }
-
-

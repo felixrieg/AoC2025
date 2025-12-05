@@ -282,7 +282,7 @@ mod tests {
     fn test_range_iterator_any() {
         let r = Range::new(1, 10);
         assert!(r.clone().any(|x| x == 5));
-        
+
         let mut r = Range::new(1, 10);
         assert!(!r.any(|x| x == 15));
     }
@@ -291,7 +291,7 @@ mod tests {
     fn test_range_iterator_all() {
         let r = Range::new(1, 5);
         assert!(r.clone().all(|x| x > 0));
-        
+
         let mut r = Range::new(1, 5);
         assert!(!r.all(|x| x > 3));
     }
