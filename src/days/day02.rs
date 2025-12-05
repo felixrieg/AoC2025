@@ -32,19 +32,19 @@ fn solve_with(input: &[String], check_fn: fn(&usize) -> bool) -> usize {
 fn is_number_repeated(n: &usize) -> bool {
     let s = n.to_string();
     let len = s.len();
-    len % 2 == 0 && has_number_repeates_of_size_fast(&s, len / 2)
+    len.is_multiple_of(2) && has_number_repeats_of_size_fast(&s, len / 2)
 }
 
 fn is_number_repeated_any_size(n: &usize) -> bool {
     let s = n.to_string();
     let max_repeat_size = s.len() / 2;
-    (1..=max_repeat_size).any(|size| has_number_repeates_of_size_fast(&s, size))
+    (1..=max_repeat_size).any(|size| has_number_repeats_of_size_fast(&s, size))
 }
 
-fn has_number_repeates_of_size_fast(s: &str, size: usize) -> bool {
+fn has_number_repeats_of_size_fast(s: &str, size: usize) -> bool {
     let bytes = s.as_bytes();
 
-    if bytes.len() % size != 0 || bytes[0] == b'0' || bytes[size] == b'0' {
+    if !bytes.len().is_multiple_of(size) || bytes[0] == b'0' || bytes[size] == b'0' {
         return false;
     }
 
