@@ -1,0 +1,25 @@
+# Rust
+target/
+**/*.rs.bk
+*.pdb
+Cargo.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Advent of Code
+# Input files (persönliche Puzzle-Inputs)
+**/input.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+
+# Added by cargo
+
+/target
