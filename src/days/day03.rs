@@ -45,7 +45,8 @@ fn get_highest_number_of_size(numbers: &[u8], size: usize) -> usize {
     let mut digits: Vec<usize> = vec![0; size];
     let mut current_limit = 0;
     for hi in 0..digits.len() {
-        for index in current_limit..(numbers.len() - (size - hi - 1)) {
+        let start = current_limit;
+        for index in start..(numbers.len() - (size - hi - 1)) {
             if numbers[index] > numbers[digits[hi]] || (hi > 0 && digits[hi - 1] >= digits[hi]) {
                 digits[hi] = index;
                 current_limit = index + 1;

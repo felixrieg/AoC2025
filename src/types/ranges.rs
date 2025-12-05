@@ -10,7 +10,7 @@ impl Range {
     }
 
     pub fn size(&self) -> usize {
-        (self.end - self.start + 1) as usize
+        self.end - self.start + 1
     }
 
     pub fn contains(&self, n: usize) -> bool {
@@ -213,11 +213,11 @@ mod tests {
 
     #[test]
     fn test_range_iterator_large_range() {
-        let mut r = Range::new(1, 10);
+        let r = Range::new(1, 10);
         let mut count = 0;
-        while let Some(val) = r.next() {
+        for val in r {
             count += 1;
-            assert!(val >= 1 && val <= 10);
+            assert!((1..=10).contains(&val));
         }
         assert_eq!(count, 10);
     }

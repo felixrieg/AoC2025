@@ -35,12 +35,11 @@ fn solve_part2(input: &[String]) -> i64 {
 
         if position <= 0 || position >= 100 {
             let pos_abs = position.abs();
-            let mut additional_zeros = if position == 0 {
-                1
-            } else if position < 0 {
-                (pos_abs / 100) as u32 + 1
-            } else {
-                (pos_abs / 100) as u32
+
+            let mut additional_zeros = match position {
+                0 => 1,
+                pos if pos < 0 => (pos_abs / 100) as u32 + 1,
+                _ => (pos_abs / 100) as u32,
             };
 
             if position < 0 && position == -movement.abs() {

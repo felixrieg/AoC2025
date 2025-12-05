@@ -52,7 +52,7 @@ fn merge_ranges(ranges: &[Range]) -> Vec<Range> {
 }
 
 fn map_to_ranges_and_numbers(input: &[String]) -> (Vec<Range>, Vec<usize>) {
-    let split_inputs = utils::split_on_empty_lines(&input);
+    let split_inputs = utils::split_on_empty_lines(input);
     assert_eq!(split_inputs.len(), 2);
 
     let ranges = convert_to_ranges(&split_inputs[0]);
