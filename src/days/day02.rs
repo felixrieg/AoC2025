@@ -1,16 +1,20 @@
+use std::time::Instant;
+
 use crate::{types::ranges::Range, utils};
 
 const DAY: u8 = 2;
 
 pub fn solve() {
-    println!("Löse Tag {}...", DAY);
-    let inputs = utils::read_input_and_split(DAY, ",");
+    let inputs = utils::read_input_and_split(DAY, false, ",");
 
+    let start = Instant::now();
     let part1 = solve_part1(&inputs);
-    let part2 = solve_part2(&inputs);
+    let duration1 = start.elapsed();
 
-    println!("  Teil 1: {}", part1);
-    println!("  Teil 2: {}", part2);
+    let start = Instant::now();
+    let part2 = solve_part2(&inputs);
+    let duration2 = start.elapsed();
+    utils::print_grid(DAY, part1 as usize, part2 as usize, duration1, duration2);
 }
 
 fn solve_part1(input: &[String]) -> usize {
@@ -56,56 +60,33 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_part_1() {
-        let input = vec![
-            "11-22".to_string(),
-            "95-115".to_string(),
-            "998-1012".to_string(),
-            "1188511880-1188511890".to_string(),
-            "222220-222224".to_string(),
-            "1698522-1698528".to_string(),
-            "446443-446449".to_string(),
-            "38593856-38593862".to_string(),
-            "565653-565659".to_string(),
-            "824824821-824824827".to_string(),
-            "2121212118-2121212124".to_string(),
-        ];
+    fn example_part_1() {
+        let input = utils::read_input_and_split(DAY, true, ",");
+
         let result = solve_part1(&input);
         assert_eq!(result, 1227775554);
     }
 
     #[test]
-    fn test_solve_part_1() {
-        let inputs = utils::read_input_and_split(DAY, ",");
+    fn solve_part_1() {
+        let input_lines = utils::read_input_and_split(DAY, false, ",");
 
-        let part1 = solve_part1(&inputs);
+        let part1 = solve_part1(&input_lines);
         assert_eq!(part1, 18595663903);
     }
 
     #[test]
-    fn test_part_2() {
-        let input = vec![
-            "11-22".to_string(),
-            "95-115".to_string(),
-            "998-1012".to_string(),
-            "1188511880-1188511890".to_string(),
-            "222220-222224".to_string(),
-            "1698522-1698528".to_string(),
-            "446443-446449".to_string(),
-            "38593856-38593862".to_string(),
-            "565653-565659".to_string(),
-            "824824821-824824827".to_string(),
-            "2121212118-2121212124".to_string(),
-        ];
+    fn example_part_2() {
+        let input = utils::read_input_and_split(DAY, true, ",");
         let result = solve_part2(&input);
         assert_eq!(result, 4174379265);
     }
 
     #[test]
-    fn test_solve_part_2() {
-        let inputs = utils::read_input_and_split(DAY, ",");
+    fn solve_part_2() {
+        let input_lines = utils::read_input_and_split(DAY, false, ",");
 
-        let part2 = solve_part2(&inputs);
+        let part2 = solve_part2(&input_lines);
         assert_eq!(part2, 19058204438);
     }
 }

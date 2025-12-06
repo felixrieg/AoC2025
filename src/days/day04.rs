@@ -1,17 +1,20 @@
+use std::time::Instant;
+
 use crate::utils;
 
 const DAY: u8 = 4;
 
 pub fn solve() {
-    println!("Löse Tag {}...", DAY);
+    let inputs = utils::read_lines(DAY, false);
 
-    let inputs = utils::read_lines(DAY);
-
+    let start = Instant::now();
     let part1 = solve_part1(&inputs);
-    let part2 = solve_part2(&inputs);
+    let duration1 = start.elapsed();
 
-    println!("  Teil 1: {}", part1);
-    println!("  Teil 2: {}", part2);
+    let start = Instant::now();
+    let part2 = solve_part2(&inputs);
+    let duration2 = start.elapsed();
+    utils::print_grid(DAY, part1 as usize, part2 as usize, duration1, duration2);
 }
 
 fn solve_part1(input: &[String]) -> usize {
@@ -110,54 +113,33 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_part_1() {
-        let input = vec![
-            "..@@.@@@@.".to_string(),
-            "@@@.@.@.@@".to_string(),
-            "@@@@@.@.@@".to_string(),
-            "@.@@@@..@.".to_string(),
-            "@@.@@@@.@@".to_string(),
-            ".@@@@@@@.@".to_string(),
-            ".@.@.@.@@@".to_string(),
-            "@.@@@.@@@@".to_string(),
-            ".@@@@@@@@.".to_string(),
-            "@.@.@@@.@.".to_string(),
-        ];
+    fn example_part_1() {
+        let input = utils::read_lines(DAY, true);
+
         let result = solve_part1(&input);
         assert_eq!(result, 13);
     }
 
     #[test]
-    fn test_solve_part_1() {
-        let inputs = utils::read_lines(DAY);
+    fn solve_part_1() {
+        let input_lines = utils::read_lines(DAY, false);
 
-        let part1 = solve_part1(&inputs);
+        let part1 = solve_part1(&input_lines);
         assert_eq!(part1, 1508);
     }
 
     #[test]
-    fn test_part_2() {
-        let input = vec![
-            "..@@.@@@@.".to_string(),
-            "@@@.@.@.@@".to_string(),
-            "@@@@@.@.@@".to_string(),
-            "@.@@@@..@.".to_string(),
-            "@@.@@@@.@@".to_string(),
-            ".@@@@@@@.@".to_string(),
-            ".@.@.@.@@@".to_string(),
-            "@.@@@.@@@@".to_string(),
-            ".@@@@@@@@.".to_string(),
-            "@.@.@@@.@.".to_string(),
-        ];
+    fn example_part_2() {
+        let input = utils::read_lines(DAY, true);
         let result = solve_part2(&input);
         assert_eq!(result, 43);
     }
 
     #[test]
-    fn test_solve_part_2() {
-        let inputs = utils::read_lines(DAY);
+    fn solve_part_2() {
+        let input_lines = utils::read_lines(DAY, false);
 
-        let part2 = solve_part2(&inputs);
+        let part2 = solve_part2(&input_lines);
         assert_eq!(part2, 8538);
     }
 }

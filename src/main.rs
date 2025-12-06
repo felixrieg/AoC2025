@@ -2,7 +2,7 @@ mod days;
 mod types;
 mod utils;
 
-use std::env;
+use std::{env, time::Instant};
 
 const AVAILABLE_DAYS: &[(u8, fn())] = &[
     (1, days::day01::solve),
@@ -20,10 +20,15 @@ fn main() {
         day = args[1].parse().expect("Tag muss eine Zahl sein");
     }
 
+    utils::print_grid_header();
+
+    let start = Instant::now();
     match day {
         0 => solve_all(),
         i => solve(i),
     }
+    let total_duration = start.elapsed();
+    utils::print_time(total_duration);
 }
 
 fn solve(day: u8) {
@@ -36,7 +41,6 @@ fn solve(day: u8) {
 }
 
 fn solve_all() {
-    println!("Löse alle Tage:");
     for &(_, solver) in AVAILABLE_DAYS {
         solver();
     }

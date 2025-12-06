@@ -1,17 +1,20 @@
+use std::time::Instant;
+
 use crate::{types::ranges::Range, utils};
 
 const DAY: u8 = 5;
 
 pub fn solve() {
-    println!("Löse Tag {}...", DAY);
+    let input = utils::read_lines(DAY, false);
 
-    let input = utils::read_lines(DAY);
-
+    let start = Instant::now();
     let part1 = solve_part1(&input);
-    let part2 = solve_part2(&input);
+    let duration1 = start.elapsed();
 
-    println!("  Teil 1: {}", part1);
-    println!("  Teil 2: {}", part2);
+    let start = Instant::now();
+    let part2 = solve_part2(&input);
+    let duration2 = start.elapsed();
+    utils::print_grid(DAY, part1 as usize, part2 as usize, duration1, duration2);
 }
 
 fn solve_part1(input: &[String]) -> usize {
@@ -80,56 +83,33 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_part_1() {
-        let input = vec![
-            "3-5".to_string(),
-            "10-14".to_string(),
-            "16-20".to_string(),
-            "12-18".to_string(),
-            "".to_string(),
-            "1".to_string(),
-            "5".to_string(),
-            "8".to_string(),
-            "11".to_string(),
-            "17".to_string(),
-            "32".to_string(),
-        ];
+    fn example_part_1() {
+        let input = utils::read_lines(DAY, true);
+
         let result = solve_part1(&input);
         assert_eq!(result, 3);
     }
 
     #[test]
-    fn test_solve_part_1() {
-        let input = utils::read_lines(DAY);
+    fn solve_part_1() {
+        let input_lines = utils::read_lines(DAY, false);
 
-        let part1 = solve_part1(&input);
+        let part1 = solve_part1(&input_lines);
         assert_eq!(part1, 615);
     }
 
     #[test]
-    fn test_part_2() {
-        let input = vec![
-            "3-5".to_string(),
-            "10-14".to_string(),
-            "16-20".to_string(),
-            "12-18".to_string(),
-            "".to_string(),
-            "1".to_string(),
-            "5".to_string(),
-            "8".to_string(),
-            "11".to_string(),
-            "17".to_string(),
-            "32".to_string(),
-        ];
+    fn example_part_2() {
+        let input = utils::read_lines(DAY, true);
         let result = solve_part2(&input);
         assert_eq!(result, 14);
     }
 
     #[test]
-    fn test_solve_part_2() {
-        let input = utils::read_lines(DAY);
+    fn solve_part_2() {
+        let input_lines = utils::read_lines(DAY, false);
 
-        let part2 = solve_part2(&input);
+        let part2 = solve_part2(&input_lines);
         assert_eq!(part2, 353716783056994);
     }
 }

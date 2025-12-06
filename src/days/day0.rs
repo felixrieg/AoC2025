@@ -1,24 +1,29 @@
+use std::time::Instant;
+
 use crate::utils;
 
-const DAY: u8 = 0;
+const DAY: u8 = 1;
 
 pub fn solve() {
-    println!("Löse Tag {}...", DAY);
-    let input_line: String = utils::read_input_and_split(DAY, ",");
+    let inputs = utils::read_lines(DAY, false);
 
+    let start = Instant::now();
     let part1 = solve_part1(&inputs);
+    let duration1 = start.elapsed();
+
+    let start = Instant::now();
     let part2 = solve_part2(&inputs);
+    let duration2 = start.elapsed();
 
-    println!("  Teil 1: {}", part1);
-    println!("  Teil 2: {}", part2);
+    utils::print_grid(DAY, part1, part2, duration1, duration2);
 }
 
-fn solve_part1(input: &Vec<String>) -> usize {
-    input.len()
+fn solve_part1(input: &[String]) -> usize {
+    0
 }
 
-fn solve_part2(input: &Vec<String>) -> usize {
-    input.len()
+fn solve_part2(input: &[String]) -> usize {
+    0
 }
 
 #[cfg(test)]
@@ -26,37 +31,33 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_solve_all() {
-        solve();
-    }
+    fn example_part_1() {
+        let input = utils::read_lines(DAY, true);
 
-    #[test]
-    fn test_part_1() {
-        let input = vec!["line".to_string()];
         let result = solve_part1(&input);
         assert_eq!(result, 0);
     }
 
     #[test]
-    fn test_solve_part_1() {
-        let input_lines = utils::read_lines(DAY);
+    fn solve_part_1() {
+        let input_lines = utils::read_lines(DAY, false);
 
         let part1 = solve_part1(&input_lines);
-        assert_eq!(part1, 17109);
+        assert_eq!(part1, 0);
     }
 
     #[test]
-    fn test_part_2() {
-        let input = vec!["line".to_string()];
+    fn example_part_2() {
+        let input = utils::read_lines(DAY, true);
         let result = solve_part2(&input);
         assert_eq!(result, 0);
     }
 
     #[test]
-    fn test_solve_part_2() {
-        let input_lines = utils::read_lines(DAY);
+    fn solve_part_2() {
+        let input_lines = utils::read_lines(DAY, false);
 
         let part2 = solve_part2(&input_lines);
-        assert_eq!(part2, 169347417057382);
+        assert_eq!(part2, 0);
     }
 }
