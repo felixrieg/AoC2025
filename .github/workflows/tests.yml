@@ -103,4 +103,4 @@ jobs:
           key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Run release binary
-        run: time cargo run --release --verbose
+        run: cargo run --release --verbose
