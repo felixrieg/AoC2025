@@ -10,6 +10,7 @@ const AVAILABLE_DAYS: &[(u8, fn())] = &[
     (3, days::day03::solve),
     (4, days::day04::solve),
     (5, days::day05::solve),
+    (6, days::day06::solve),
 ];
 
 fn main() {
