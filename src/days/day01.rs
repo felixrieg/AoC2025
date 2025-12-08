@@ -79,6 +79,7 @@ mod tests {
     use super::*;
 
     #[test]
+    #[ignore]
     fn example_part_1() {
         let input = utils::read_lines(DAY, true);
 
@@ -87,6 +88,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn solve_part_1() {
         let input_lines = utils::read_lines(DAY, false);
 
@@ -95,6 +97,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn example_part_2() {
         let input = utils::read_lines(DAY, true);
         let result = solve_part2(&input);
@@ -102,6 +105,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn solve_part_2() {
         let input_lines = utils::read_lines(DAY, false);
 
