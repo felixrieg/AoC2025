@@ -42,6 +42,10 @@ pub fn split_on_empty_lines(input: &[String]) -> Vec<Vec<String>> {
         .collect()
 }
 
+pub fn convert_to_matrix(input: &[String]) -> Vec<Vec<char>> {
+    input.iter().map(|line| line.chars().collect()).collect()
+}
+
 pub fn print_grid_header() {
     println!("+---------------------------------------------------+");
     println!("| Day  | Part                         | Duration    |");
