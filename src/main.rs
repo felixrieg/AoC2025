@@ -2,6 +2,7 @@ mod days;
 mod types;
 mod utils;
 
+use rayon::prelude::*;
 use std::{env, time::Instant};
 
 const AVAILABLE_DAYS: &[(u8, fn())] = &[
@@ -12,6 +13,7 @@ const AVAILABLE_DAYS: &[(u8, fn())] = &[
     (5, days::day05::solve),
     (6, days::day06::solve),
     (7, days::day07::solve),
+    (8, days::day08::solve),
 ];
 
 fn main() {
@@ -43,7 +45,7 @@ fn solve(day: u8) {
 }
 
 fn solve_all() {
-    for &(_, solver) in AVAILABLE_DAYS {
+    AVAILABLE_DAYS.par_iter().for_each(|&(_, solver)| {
         solver();
-    }
+    });
 }

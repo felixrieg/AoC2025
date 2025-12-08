@@ -20,7 +20,6 @@ pub fn solve() {
 }
 
 fn solve_part1(input: &[String]) -> usize {
-    // track unique splitter positions as (row, col) tuples for clarity
     let mut used_splitters: HashSet<(usize, usize)> = HashSet::new();
 
     let matrix = utils::convert_to_matrix(input);
@@ -30,21 +29,18 @@ fn solve_part1(input: &[String]) -> usize {
         .position(|&n| n == 'S')
         .expect("No start found");
 
-    // current beam positions (unique)
     let mut current_beams: HashSet<usize> = HashSet::new();
     current_beams.insert(start_index);
 
-    for row in 1..matrix.len() {
+    for (row, matrix_row) in matrix.iter().enumerate().skip(1) {
         let mut new_beams: HashSet<usize> = HashSet::new();
         for &beam in &current_beams {
-            let cell = matrix[row][beam];
+            let cell = matrix_row[beam];
             match cell {
                 '.' => {
-                    // continue straight
                     new_beams.insert(beam);
                 }
                 '^' => {
-                    // record splitter at (row, beam)
                     used_splitters.insert((row, beam));
                     if beam > 0 {
                         new_beams.insert(beam - 1); // left
@@ -71,7 +67,6 @@ fn solve_part2(input: &[String]) -> usize {
         .expect("No start found");
 
     let rows = matrix.len();
-    // cache using a flat Vec<Option<usize>> for speed (rows * width)
     let mut cache: Vec<Option<usize>> = vec![None; rows * width];
 
     traverse(1, start_index, &matrix, width, &mut cache) + 1
