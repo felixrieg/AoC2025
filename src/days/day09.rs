@@ -4,8 +4,6 @@ use std::{
     time::Instant,
 };
 
-use rayon::prelude::*;
-
 use crate::{types::point3d::Point2D, utils};
 
 const DAY: u8 = 9;
@@ -69,10 +67,7 @@ fn solve_part2(input: &[String]) -> usize {
         let mut mistake = points.iter().any(|p| p.inside_rectangle(point1, point2));
         if !mistake {
             for border_point in get_inner_border_points(*point1, *point2) {
-                if collision_map
-                    .get(&(border_point.x, border_point.y))
-                    .is_some()
-                {
+                if collision_map.contains_key(&(border_point.x, border_point.y)) {
                     mistake = true;
                     break;
                 }
