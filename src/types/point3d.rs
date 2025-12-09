@@ -29,6 +29,59 @@ impl Point3D {
     }
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct Point2D {
+    pub x: isize,
+    pub y: isize,
+}
+
+impl Point2D {
+    pub fn new(x: isize, y: isize) -> Self {
+        Point2D { x, y }
+    }
+
+    #[allow(unused)]
+    pub fn distance_to(&self, other: &Point2D) -> f64 {
+        let dx = (self.x - other.x) as f64;
+        let dy = (self.y - other.y) as f64;
+        (dx * dx + dy * dy).sqrt()
+    }
+
+    pub fn from_string(s: &str) -> Option<Self> {
+        let parts: Vec<&str> = s.split(',').collect();
+        if parts.len() != 2 {
+            return None;
+        }
+        let x = parts[0].trim().parse().ok()?;
+        let y = parts[1].trim().parse().ok()?;
+        Some(Point2D::new(x, y))
+    }
+
+    pub fn square_between(one: &Point2D, two: &Point2D) -> isize {
+        let dx = (one.x - two.x).abs() + 1;
+        let dy = (one.y - two.y).abs() + 1;
+        dx * dy
+    }
+
+    pub fn points_between(one: &Point2D, two: &Point2D) -> Vec<Point2D> {
+        let mut points = Vec::new();
+        for x in one.x.min(two.x)..=one.x.max(two.x) {
+            for y in one.y.min(two.y)..=one.y.max(two.y) {
+                points.push(Point2D::new(x, y));
+            }
+        }
+        points
+    }
+
+    pub fn inside_rectangle(&self, point1: &Point2D, point2: &Point2D) -> bool {
+        let min_x = point1.x.min(point2.x);
+        let max_x = point1.x.max(point2.x);
+        let min_y = point1.y.min(point2.y);
+        let max_y = point1.y.max(point2.y);
+        self.x > min_x && self.x < max_x && self.y > min_y && self.y < max_y
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
