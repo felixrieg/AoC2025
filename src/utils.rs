@@ -85,6 +85,32 @@ pub fn print_time(time: time::Duration) {
     println!("+---------------------------------------------------+");
 }
 
+pub fn find_between(hay: &str, open: char, close: char) -> Option<&str> {
+    let mut start_opt = None;
+    for (i, ch) in hay.char_indices() {
+        if ch == open {
+            start_opt = Some(i);
+            break;
+        }
+    }
+    if let Some(start) = start_opt
+        && let Some(rel) = hay[start..].find(close)
+    {
+        let end = start + rel;
+        // slice excluding the delimiters
+        return Some(&hay[start + 1..end]);
+    }
+    None
+}
+/// parse "1,2,3" into Vec<usize> [1, 2, 3]
+pub fn parse_numbers(slice: &str) -> Vec<usize> {
+    slice
+        .split(',')
+        .map(str::trim)
+        .filter_map(|t| t.parse::<usize>().ok())
+        .collect()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -323,5 +349,59 @@ mod tests {
         let groups = split_on_empty_lines(&input);
 
         assert_eq!(groups.len(), 0);
+    }
+
+    #[test]
+    fn test_find_between_basic() {
+        assert_eq!(find_between("abc[def]ghi", '[', ']'), Some("def"));
+    }
+
+    #[test]
+    fn test_find_between_no_open() {
+        assert_eq!(find_between("no brackets here", '[', ']'), None);
+    }
+
+    #[test]
+    fn test_find_between_no_close() {
+        assert_eq!(find_between("abc[def", '[', ']'), None);
+    }
+
+    #[test]
+    fn test_find_between_multiple_pairs() {
+        assert_eq!(find_between("x[a]y[b]z", '[', ']'), Some("a"));
+    }
+
+    #[test]
+    fn test_find_between_nested() {
+        // first opening bracket pairs with the first closing bracket after it
+        assert_eq!(find_between("[a[b]c]", '[', ']'), Some("a[b"));
+    }
+
+    #[test]
+    fn test_parse_nums_basic() {
+        assert_eq!(parse_numbers("1,2,3"), vec![1usize, 2, 3]);
+    }
+
+    #[test]
+    fn test_parse_nums_with_spaces() {
+        assert_eq!(parse_numbers("  10,  20 ,30 "), vec![10usize, 20, 30]);
+    }
+
+    #[test]
+    fn test_parse_nums_empty() {
+        let v: Vec<usize> = parse_numbers("");
+        assert!(v.is_empty());
+    }
+
+    #[test]
+    fn test_parse_nums_invalid_tokens() {
+        // invalid tokens are filtered out
+        assert_eq!(parse_numbers("1,foo,2,bar,3"), vec![1usize, 2, 3]);
+    }
+
+    #[test]
+    fn test_parse_nums_trailing_commas_and_single() {
+        assert_eq!(parse_numbers("4,"), vec![4usize]);
+        assert_eq!(parse_numbers("7"), vec![7usize]);
     }
 }
