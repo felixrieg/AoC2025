@@ -75,6 +75,7 @@ fn solve_part1(input: &[String], start: &str) -> usize {
     traverse(&mapping, start_index)
 }
 
+#[allow(clippy::ptr_arg)]
 fn reverse_mapping(mapping: &Vec<Vec<usize>>) -> Vec<Vec<usize>> {
     let mut rev_map: Vec<Vec<usize>> = vec![vec![]; mapping.len()];
 
