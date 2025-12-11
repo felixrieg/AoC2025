@@ -60,7 +60,7 @@ pub fn print_grid(
     time2: time::Duration,
 ) {
     println!(
-        "| {:>2}   | Part 1: {:<20} |  {:>3}.{:03} ms |",
+        "|  {:<2}  | Part 1: {:<20} |  {:>3}.{:03} ms |",
         day,
         solution1,
         time1.subsec_millis(),
