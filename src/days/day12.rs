@@ -51,8 +51,6 @@ fn parse_input(input: &[String]) -> Vec<(usize, usize, Vec<usize>)> {
     //             .sum()
     //     })
     //     .collect::<Vec<usize>>();
-
-
 }
 
 fn parse_puzzle_data(input: &[String]) -> Vec<(usize, usize, Vec<usize>)> {
