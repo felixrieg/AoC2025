@@ -6,8 +6,7 @@ pub fn read_input(day: u8, example: bool) -> String {
         true => format!("inputs/day{:02}_example.txt", day),
         false => format!("inputs/day{:02}.txt", day),
     };
-    fs::read_to_string(&filename)
-        .unwrap_or_else(|_| panic!("Input file {} not found", filename))
+    fs::read_to_string(&filename).unwrap_or_else(|_| panic!("Input file {} not found", filename))
 }
 
 pub fn read_lines(day: u8, example: bool) -> Vec<String> {
