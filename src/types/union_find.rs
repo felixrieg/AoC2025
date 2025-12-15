@@ -1,16 +1,21 @@
 use std::collections::HashMap;
 
+/// Union-Find (Disjoint Set Union) data structure with Path Compression
+/// for efficient union and find operations.
 pub struct UnionFind {
     parent: Vec<usize>,
 }
 
 impl UnionFind {
+    /// Creates a new UnionFind structure with n elements
     pub fn new(n: usize) -> Self {
         UnionFind {
             parent: (0..n).collect(),
         }
     }
 
+    /// Finds the representative element (root) of an element
+    /// with Path Compression for optimal performance
     pub fn find(&mut self, x: usize) -> usize {
         if self.parent[x] != x {
             self.parent[x] = self.find(self.parent[x]);
@@ -18,6 +23,7 @@ impl UnionFind {
         self.parent[x]
     }
 
+    /// Unifies two sets by unioning their roots
     pub fn union(&mut self, x: usize, y: usize) {
         let px = self.find(x);
         let py = self.find(y);
@@ -26,6 +32,7 @@ impl UnionFind {
         }
     }
 
+    /// Returns a map from root to cluster size
     pub fn cluster_sizes(&mut self) -> HashMap<usize, usize> {
         let mut sizes = HashMap::new();
         for i in 0..self.parent.len() {
@@ -35,11 +42,13 @@ impl UnionFind {
         sizes
     }
 
+    /// Returns the number of distinct clusters
     #[allow(unused)]
     pub fn cluster_count(&mut self) -> usize {
         self.cluster_sizes().len()
     }
 
+    /// Returns all elements grouped by their cluster
     #[allow(unused)]
     pub fn get_clusters(&mut self) -> Vec<Vec<usize>> {
         let mut clusters: HashMap<usize, Vec<usize>> = HashMap::new();

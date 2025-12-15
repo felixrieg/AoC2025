@@ -24,7 +24,7 @@ fn main() {
     let mut day: u8 = 0;
 
     if args.len() == 2 {
-        day = args[1].parse().expect("Tag muss eine Zahl sein");
+        day = args[1].parse().expect("Day must be a number");
     }
 
     utils::print_grid_header();

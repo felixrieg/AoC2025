@@ -7,7 +7,7 @@ pub fn read_input(day: u8, example: bool) -> String {
         false => format!("inputs/day{:02}.txt", day),
     };
     fs::read_to_string(&filename)
-        .unwrap_or_else(|_| panic!("Input-Datei {} nicht gefunden", filename))
+        .unwrap_or_else(|_| panic!("Input file {} not found", filename))
 }
 
 pub fn read_lines(day: u8, example: bool) -> Vec<String> {
@@ -116,14 +116,14 @@ mod tests {
     use super::*;
     use std::fs;
 
-    // Helper: Erstelle Test-Eingabedatei
+    // Helper: Create test input file
     fn create_test_input_file(day: u8, content: &str) {
         let _ = fs::create_dir_all("inputs");
         let filename = format!("inputs/day{:02}.txt", day);
-        fs::write(&filename, content).expect("Fehler beim Schreiben der Test-Datei");
+        fs::write(&filename, content).expect("Error writing test file");
     }
 
-    // Helper: Lösche Test-Eingabedatei
+    // Helper: Delete test input file
     fn cleanup_test_file(day: u8) {
         let filename = format!("inputs/day{:02}.txt", day);
         let _ = fs::remove_file(&filename);
@@ -142,7 +142,7 @@ mod tests {
     }
 
     #[test]
-    #[should_panic(expected = "Input-Datei")]
+    #[should_panic(expected = "Input file")]
     fn test_read_input_file_not_found() {
         let day = 98;
         cleanup_test_file(day);
